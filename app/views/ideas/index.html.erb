@@ -1,16 +1,31 @@
+<%= render 'pages/home' unless user_signed_in? %>
+
 <div id="ideas" class="transitions-enabled">
   <% @ideas.each do |idea| %>
     <div class="box panel panel-default">
-      <%= image_tag idea.image.url(:medium) %>
+      <%= link_to image_tag(idea.image.url(:medium)), idea %>
       <div class="panel-body">
-        <%= idea.description %>
-        <%= idea.user.email if idea.user %>
-        <%= link_to 'Show', idea_path(idea) %>
+        <p><%= idea.description %></p>
+        <p><strong><%= idea.user.name if idea.user %></strong></p>
+        
         <% if idea.user == current_user %>
-          <%= link_to 'Edit', edit_idea_path(idea) %>
-          <%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <div class="actions">
+            <%= link_to edit_idea_path(idea) do %>
+              <span class="glyphicon glyphicon-edit"></span>
+              Edit
+            <% end %>
+            <%= link_to idea, method: :delete, data: { confirm: 'Are you sure?' } do %>
+              <span class="glyphicon glyphicon-trash"></span>
+              Delete
+            <% end %>
+          </div>
         <% end %>
+        
       </div>
     </div>
   <% end %>
+</div>
+
+<div class="center">
+  
 </div>

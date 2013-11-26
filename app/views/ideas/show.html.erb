@@ -1,9 +1,22 @@
-<%= image_tag @idea.image.url(:medium) %>
-
-<p>
-  <strong>Description:</strong>
-  <%= @idea.description %>
-</p>
-
-<%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>
+
+<div class="row">
+        <div class="col-md-offset-2 col-md-8">
+                <div class="panel panel-default">
+                <div class="panel-heading center">
+                        <%= image_tag @idea.image.url(:medium) %>
+                </div>
+                <div class="panel-body">
+                <p><%= @idea.description %></p>
+                <p><strong><%= @idea.user.name if @idea.user %></strong></p>
+
+                <% if @idea.user == current_user %>
+                        <%= link_to edit_idea_path(@idea) do %>
+        <span class="glyphicon glyphicon-edit"></span>
+        Edit
+      <% end %>
+                <% end %>
+                </div>
+        </div>
+
+</div>
