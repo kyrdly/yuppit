@@ -2,9 +2,10 @@ class IdeasController < ApplicationController
   before_action :set_idea, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
 
+  
   def index
-    @ideas = Idea.all
-  end
+   @ideas = Idea.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 8)
+ end
 
   def show
   end
