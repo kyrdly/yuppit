@@ -1,4 +1,6 @@
 Yupp::Application.routes.draw do
+  resources :ideas
+
   devise_for :users
   root "pages#home"
   get "about" => "pages#about"
