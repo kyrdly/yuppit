@@ -1,34 +1,16 @@
-<h1>Listing ideas</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Description</th>
-      <th>User</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @ideas.each do |idea| %>
-      <tr>
-        <td><%= image_tag idea.image.url(:medium) %></td>
-        <td><%= idea.description %></td>
-        <td><%= idea.user.email if idea.user %></td>
-        <td><%= link_to 'Show', idea_path(idea) %></td>
+<div id="ideas" class="transitions-enabled">
+  <% @ideas.each do |idea| %>
+    <div class="box panel panel-default">
+      <%= image_tag idea.image.url(:medium) %>
+      <div class="panel-body">
+        <%= idea.description %>
+        <%= idea.user.email if idea.user %>
+        <%= link_to 'Show', idea_path(idea) %>
         <% if idea.user == current_user %>
-          <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
-          <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <%= link_to 'Edit', edit_idea_path(idea) %>
+          <%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %>
         <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-<% if user_signed_in? %>
-  <%= link_to 'New', new_idea_path %>
-<% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
